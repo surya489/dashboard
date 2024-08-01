@@ -1,0 +1,9 @@
+.right {
+    width: 260px;
+    background: #333;
+    color: #fff;
+    height: 100vh;
+    overflow: hidden;
+    float: left;
+    position: fixed;
+}

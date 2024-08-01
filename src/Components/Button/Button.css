@@ -1,0 +1,23 @@
+a {
+    text-decoration: none;
+}
+
+a svg {
+    width: 24px;
+    font-size: 24px;
+}
+
+.button.fixed {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 1px solid #ccc;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+}
+
+.button.fixed svg {
+    font-size: 25px;
+}
