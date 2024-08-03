@@ -8,10 +8,10 @@ import './Sidebar.css';
 import Right from '../Right/Right';
 import Button from '../Button/Button';
 
-const Sidebar = () => {
+const Sidebar = ({ activeBadge, bgImage, className }) => {
     return (
         <Right>
-            <div className="sidebar">
+            <div className={`sidebar ${activeBadge ? `sidebar_${activeBadge}` : ''} sidebar ${className && bgImage !== '' && bgImage !== null ? className : ''}`} style={{ backgroundImage: className === 'has_bg_image' ? `url(${bgImage})` : undefined }}>
                 <div className='sidbar_wrap'>
                     <div className="logo">CREATIVE TIM</div>
                     <ul>

@@ -6,4 +6,5 @@
     overflow: hidden;
     float: left;
     position: fixed;
+    transition: all .3s ease-in-out;
 }
