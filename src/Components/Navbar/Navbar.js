@@ -5,7 +5,7 @@ import { faTachometerAlt, faGlobe, faSearch, faChevronDown } from '@fortawesome/
 
 import Button from "../Button/Button";
 
-const Navbar = () => {
+const Navbar = ({ title }) => {
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
     const toggleDropdown = () => {
@@ -17,7 +17,7 @@ const Navbar = () => {
             <div className="nav_left">
                 <ul className="nav_left_wrap">
                     <li className="nav_left_items">
-                        <Button href="/" isLink className="custom_btn">Dashboard</Button>
+                        <Button href="/" isLink className="custom_btn">{title}</Button>
                     </li>
                     <li className="nav_left_items">
                         <span><FontAwesomeIcon icon={faTachometerAlt} /></span>
