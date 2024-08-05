@@ -8,23 +8,25 @@ import bg_1 from '../assets/images/bg_1.jpg';
 const ParentComponent = () => {
     const buttonRef = useRef(null);
     const sidebarRef = useRef(null);
-    const [activeBadge, setActiveBadge] = useState(null);
+    const [activeBadge, setActiveBadge] = useState(localStorage.getItem('activeBadge') || 'primary');
     const [buttonWidth, setButtonWidth] = useState(0);
     const [showSidebar, setShowSidebar] = useState(false);
-    const [bgImage, setBgImage] = useState(bg_1);
-    const [bgImageState, setBgImageState] = useState(false);
-
+    const [bgImage, setBgImage] = useState(localStorage.getItem('bgImage') || bg_1);
+    const [bgImageState, setBgImageState] = useState(localStorage.getItem('bgImageState') === 'true');
 
     const handleBadgeChange = (badge) => {
         setActiveBadge(badge);
+        localStorage.setItem('activeBadge', badge);
     };
 
     const handleSetBgImage = () => {
         setBgImageState(!bgImageState);
-    }
+        localStorage.setItem('bgImageState', !bgImageState);
+    };
 
     const handleBgImageChange = (imageSrc) => {
         setBgImage(imageSrc);
+        localStorage.setItem('bgImage', imageSrc);
     };
 
     useEffect(() => {

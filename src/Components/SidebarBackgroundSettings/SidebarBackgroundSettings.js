@@ -7,8 +7,13 @@ import bg_3 from '../../assets/images/bg_3.jpg';
 import bg_4 from '../../assets/images/bg_4.jpg';
 
 const SidebarBackgroundSettings = ({ buttonWidth, className, onBadgeChange, onBgImageChange, onHandleSetBgImage }) => {
-    const [activeBadge, setActiveBadge] = useState('secondary');
-    const [activeBgImage, setActiveBgImage] = useState(bg_1);
+    const initialBadge = localStorage.getItem('activeBadge') || 'secondary';
+    const initialBgImage = localStorage.getItem('bgImage') || bg_1;
+    const initialBgImageState = localStorage.getItem('bgImageState') === 'true';
+
+    const [activeBadge, setActiveBadge] = useState(initialBadge);
+    const [activeBgImage, setActiveBgImage] = useState(initialBgImage);
+    const [bgImageState, setBgImageState] = useState(initialBgImageState);
 
     const handleBadgeClick = (badge) => {
         setActiveBadge(badge);
@@ -25,13 +30,24 @@ const SidebarBackgroundSettings = ({ buttonWidth, className, onBadgeChange, onBg
         }
     }, [activeBadge, onBadgeChange]);
 
+    useEffect(() => {
+        if (onBgImageChange) {
+            onBgImageChange(activeBgImage);
+        }
+    }, [activeBgImage, onBgImageChange]);
+
+    const handleCheckboxChange = () => {
+        setBgImageState(prevState => !prevState);
+        onHandleSetBgImage();
+    };
+
     return (
         <div className={`${className ? className : ''} background_settings`} style={{ right: buttonWidth + 10 + 'px' }}>
             <li className="image_checkbox d_flex">
                 <p>Background Image</p>
                 <div>
-                    <input type="checkbox" id="custom_checkbox" />
-                    <label onClick={() => onHandleSetBgImage()} htmlFor='custom_checkbox' />
+                    <input type="checkbox" id="custom_checkbox" checked={bgImageState} onChange={handleCheckboxChange} />
+                    <label htmlFor='custom_checkbox' />
                 </div>
             </li>
             <li className="d_flex filters_wrap">
