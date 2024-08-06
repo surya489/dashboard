@@ -8,11 +8,13 @@ import bg_1 from '../assets/images/bg_1.jpg';
 const ParentComponent = () => {
     const buttonRef = useRef(null);
     const sidebarRef = useRef(null);
+    const settingsRef = useRef(null);
     const [activeBadge, setActiveBadge] = useState(localStorage.getItem('activeBadge') || 'primary');
     const [buttonWidth, setButtonWidth] = useState(0);
     const [showSidebar, setShowSidebar] = useState(false);
     const [bgImage, setBgImage] = useState(localStorage.getItem('bgImage') || bg_1);
     const [bgImageState, setBgImageState] = useState(localStorage.getItem('bgImageState') === 'true');
+    const [showSettings, setShowSettings] = useState(false);
 
     const handleBadgeChange = (badge) => {
         setActiveBadge(badge);
@@ -20,7 +22,7 @@ const ParentComponent = () => {
     };
 
     const handleSetBgImage = () => {
-        setBgImageState(!bgImageState);
+        setBgImageState(prevState => !prevState);
         localStorage.setItem('bgImageState', !bgImageState);
     };
 
@@ -46,37 +48,46 @@ const ParentComponent = () => {
             if (showSidebar && sidebarRef.current && !sidebarRef.current.contains(event.target) && !buttonRef.current.contains(event.target)) {
                 setShowSidebar(false);
             }
+            if (showSettings && settingsRef.current && !settingsRef.current.contains(event.target) && !buttonRef.current.contains(event.target)) {
+                setShowSettings(false);
+            }
         };
 
         document.addEventListener('mousedown', handleClickOutside);
         return () => document.removeEventListener('mousedown', handleClickOutside);
-    }, [showSidebar]);
+    }, [showSidebar, showSettings]);
 
-    const toggleSidebar = () => {
-        setShowSidebar(prevState => !prevState);
-    };
+    const toggleSidebar = () => setShowSidebar(prevState => !prevState);
+    const toggleSettings = () => setShowSettings(prevState => !prevState);
 
     return (
         <div className="parent-container">
-            <SidebarBackgroundSettings
-                buttonWidth={buttonWidth}
-                className={`${showSidebar ? 'show' : 'hide'}`}
-                onBadgeChange={handleBadgeChange}
-                onBgImageChange={handleBgImageChange}
-                onHandleSetBgImage={handleSetBgImage}
-            />
+            {showSettings && (
+                <SidebarBackgroundSettings
+                    buttonWidth={buttonWidth}
+                    className={`${showSidebar ? 'show' : 'hide'}`}
+                    onBadgeChange={handleBadgeChange}
+                    onBgImageChange={handleBgImageChange}
+                    onHandleSetBgImage={handleSetBgImage}
+                    ref={settingsRef}
+                />
+            )}
             <Sidebar
                 activeBadge={activeBadge}
                 bgImage={bgImage}
                 className={`${bgImageState ? 'has_bg_image' : 'no_bg_image'}`}
+                ref={sidebarRef}
             />
             <div className="fixed_btn_wrap">
-                <button className="button fixed" ref={buttonRef} onClick={toggleSidebar}>
+                <button className="button fixed" ref={buttonRef} onClick={() => {
+                    toggleSidebar();
+                    toggleSettings();
+                }}>
                     <FontAwesomeIcon icon={faCog} />
                 </button>
             </div>
         </div>
     );
-}
+};
 
 export default ParentComponent;

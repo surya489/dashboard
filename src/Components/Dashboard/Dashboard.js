@@ -9,7 +9,7 @@ import Card from "../Card/Card";
 const Dashboard = () => {
     return (
         <Left>
-            <NavBar title="Dashboard" />
+            <NavBar isSeparateLink title="Dashboard" />
             <div className="dashboard_cards_wrap">
                 <Card
                     icon={faChartPie}

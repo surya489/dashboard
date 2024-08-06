@@ -24,8 +24,12 @@
     padding: 0 20px 20px;
 }
 
-.btn_wrap .custom_btn {
+.btn_wrap .custom_link_btn {
     padding: 10px;
+}
+
+.custom_link_btn {
+    cursor: pointer;
 }
 
 .sidebar .logo {
