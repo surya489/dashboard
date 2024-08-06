@@ -7,9 +7,9 @@ import UserBg from "../../assets/images/user_bg.jpeg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookF, faTwitter, faGooglePlusG } from '@fortawesome/free-brands-svg-icons';
 
-const User = ({ name, id, bio }) => {
+const User = ({ name, id, bio, className }) => {
     return (
-        <div className="">
+        <div className={`${className ? className : ''}`}>
             <div className="f_size_0">
                 <img src={UserBg} alt="bg" style={{ maxWidth: '300px' }} />
             </div>

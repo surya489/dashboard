@@ -1,0 +1,19 @@
+.col_8 {
+    width: 66.66%;
+}
+
+.col_4 {
+    width: 33.33%;
+}
+
+.align_s,
+.d_flex.align_s {
+    align-items: flex-start;
+}
+
+.m_0 {
+    margin-bottom: 0;
+    margin-top: 0;
+    margin-left: 0;
+    margin-top: 0;
+}

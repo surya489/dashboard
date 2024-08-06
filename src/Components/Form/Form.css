@@ -1,0 +1,19 @@
+.col_4 {
+    width: 25%;
+}
+
+.col_3 {
+    width: 33.33%;
+}
+
+.col_2 {
+    width: 50%;
+}
+
+.col {
+    width: 100%;
+}
+
+.d_block {
+    display: block;
+}
